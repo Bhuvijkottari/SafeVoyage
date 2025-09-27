@@ -1,0 +1,161 @@
+/* Import Leaflet CSS for maps */
+@import "leaflet/dist/leaflet.css";
+
+/* Tailwind setup */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS variables to keep theme consistent */
+:root {
+  --sv-primary: #1E6F66;
+  --sv-mint: #CFF7E1;
+  --sv-deep: #0F4D4A;
+  --sv-bg: #F2FBF8;
+  --sv-yellow: #F7C948;
+  --sv-red: #E63946;
+  --sv-blue: #457B9D;
+  --sv-dark-bg: #0F1E2D;
+  --sv-dark-bg2: #1A2A3D;
+  --sv-light-text: #F0F5F9;
+  --sv-shadow: rgba(30, 111, 102, 0.3);
+}
+
+/* Auth Page Dark Background */
+.auth-bg {
+  background: linear-gradient(180deg, var(--sv-dark-bg), var(--sv-dark-bg2));
+  color: var(--sv-light-text);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Crazy Animated Shapes */
+@keyframes floatRotate {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); opacity: 0.2; }
+  25% { transform: translateY(-15px) rotate(45deg) scale(1.1); opacity: 0.4; }
+  50% { transform: translateY(10px) rotate(90deg) scale(0.9); opacity: 0.3; }
+  75% { transform: translateY(-10px) rotate(135deg) scale(1.05); opacity: 0.5; }
+  100% { transform: translateY(0px) rotate(360deg) scale(1); opacity: 0.2; }
+}
+
+.crazy-shape {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(0,255,255,0.2));
+  width: 100px;
+  height: 100px;
+  animation: floatRotate 10s linear infinite;
+}
+
+/* Multiple shapes with different sizes, positions, and speeds */
+.crazy-shape:nth-child(1) {
+  top: 10%;
+  left: 5%;
+  width: 120px;
+  height: 120px;
+  animation-duration: 12s;
+}
+.crazy-shape:nth-child(2) {
+  top: 30%;
+  left: 70%;
+  width: 80px;
+  height: 80px;
+  animation-duration: 15s;
+  animation-delay: 2s;
+}
+.crazy-shape:nth-child(3) {
+  top: 60%;
+  left: 30%;
+  width: 150px;
+  height: 150px;
+  animation-duration: 20s;
+  animation-delay: 4s;
+}
+.crazy-shape:nth-child(4) {
+  top: 80%;
+  left: 60%;
+  width: 100px;
+  height: 100px;
+  animation-duration: 18s;
+  animation-delay: 6s;
+}
+
+/* Soft Neon Glows */
+.neon-glow {
+  box-shadow: 0 0 15px rgba(255,255,255,0.3), 0 0 30px rgba(0,255,255,0.2);
+  animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% { box-shadow: 0 0 10px rgba(255,255,255,0.2), 0 0 20px rgba(0,255,255,0.1); }
+  50% { box-shadow: 0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(0,255,255,0.2); }
+  100% { box-shadow: 0 0 15px rgba(255,255,255,0.3), 0 0 30px rgba(0,255,255,0.2); }
+}
+
+/* Buttons with crazy neon glow effect */
+.btn-glow {
+  background: var(--sv-primary);
+  color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 10px var(--sv-primary);
+  transition: all 0.3s ease-in-out;
+}
+.btn-glow:hover {
+  box-shadow: 0 0 25px var(--sv-primary), 0 0 50px var(--sv-mint);
+  transform: scale(1.1) rotate(-3deg);
+}
+
+/* Floating Clouds & Birds */
+@keyframes clouds {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(110%); }
+}
+.animate-clouds { animation: clouds 60s linear infinite; }
+
+@keyframes bird {
+  0% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(50%) translateY(-10px); }
+  100% { transform: translateX(150%) translateY(0); }
+}
+.animate-bird { animation: bird 20s linear infinite; }
+
+/* Floating Mountains / Images */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float-slow { animation: floatSlow 8s ease-in-out infinite; }
+
+/* Glowing / Pulsing elements */
+@keyframes pulseSlow {
+  0%, 100% { transform: scale(1); opacity: 0.1; }
+  50% { transform: scale(1.2); opacity: 0.3; }
+}
+.animate-pulse-slow { animation: pulseSlow 6s ease-in-out infinite; }
+
+/* Section Cards */
+.section-card {
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px var(--sv-shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.section-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--sv-shadow);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb {
+  background-color: var(--sv-primary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track { background: var(--sv-dark-bg2); }
+
+/* Responsive Helpers */
+@media (max-width: 768px) {
+  .auth-bg { padding: 2rem; }
+}
+  
