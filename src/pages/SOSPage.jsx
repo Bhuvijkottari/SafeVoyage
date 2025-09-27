@@ -6,10 +6,14 @@ import { MapContainer, TileLayer, Marker, Circle, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 
+// ✅ Import your siren sound from assets
+import sirenSound from "../assets/siren.mp3";
+
 export default function SOSPage() {
   const [status, setStatus] = useState("");
   const [sending, setSending] = useState(false);
   const [userLocation, setUserLocation] = useState(null);
+  const [sirenAudio, setSirenAudio] = useState(null);
 
   // Get user location for map preview
   useEffect(() => {
@@ -33,6 +37,12 @@ export default function SOSPage() {
       return;
     }
 
+    // 🔊 Play siren sound
+    const audio = new Audio(sirenSound);
+    audio.loop = true; // keeps playing until user stops it
+    audio.play().catch((err) => console.error("Audio play error:", err));
+    setSirenAudio(audio);
+
     setSending(true);
     setStatus("Sending SOS... ⏳");
 
@@ -50,6 +60,14 @@ export default function SOSPage() {
       setStatus("❌ Failed to send SOS");
     } finally {
       setSending(false);
+    }
+  };
+
+  const stopSiren = () => {
+    if (sirenAudio) {
+      sirenAudio.pause();
+      sirenAudio.currentTime = 0; // reset
+      setSirenAudio(null);
     }
   };
 
@@ -118,6 +136,16 @@ export default function SOSPage() {
           {sending ? "Sending..." : "Send SOS"}
           <span className="absolute top-0 left-0 w-full h-full rounded-3xl bg-red-400/20 animate-ping"></span>
         </button>
+
+        {/* Stop Siren Button (only shows when playing) */}
+        {sirenAudio && (
+          <button
+            onClick={stopSiren}
+            className="mt-3 bg-gray-800 text-white px-6 py-2 rounded-2xl shadow hover:bg-black transition"
+          >
+            Stop Siren 🔇
+          </button>
+        )}
 
         {/* Status */}
         {status && <p className="mt-4 text-lg font-semibold text-gray-800">{status}</p>}
